@@ -1,0 +1,17 @@
+<div class="relative w-max" (appClickOutside)="isOpened = false">
+   <button type="button" (click)="toggle()"
+           class="flex min-w-[150px] gap-3 items-center justify-between px-3 py-2 text-sm text-stone-500 bg-stone-100
+          border border-stone-300 rounded-md shadow-sm hover:bg-stone-50 focus:ring focus:border-blue-300"
+   >
+      {{ this.selectedItem?.text || 'Select an option' }}
+      <img class="{{isOpened ? 'rotate-180': 'rotate-0'}}" ngSrc="assets/icons/chevron-down.svg" alt="chevron" width="16" height="16">
+   </button>
+
+   <div class="absolute top-[110%] w-[inherit] origin-top-right right-0 rounded-md shadow-lg {{isOpened ? 'scale-y-100' : 'scale-y-0'}}">
+      <div class="py-1 flex flex-col bg-white rounded-md shadow-xs">
+         @for (option of options; track option.value) {
+            <app-option [ngClass]="{'bg-stone-100': option.value === selectedItem?.value}" [option]="option" (click)="onSelect(option)"/>
+         }
+      </div>
+   </div>
+</div>

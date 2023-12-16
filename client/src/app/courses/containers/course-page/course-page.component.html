@@ -1,0 +1,4 @@
+@if (course$ | async; as course) {
+   <app-heading class="mb-8">Course <span class="text-teal-500">{{ course.name }}</span></app-heading>
+   <app-course-details [course]="course"/>
+}

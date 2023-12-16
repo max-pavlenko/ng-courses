@@ -1,0 +1,13 @@
+<div class="flex items-center gap-3 py-3 px-5">
+   <span>Filter by: </span>
+   <app-dropdown (selectedOption)="updateStatus($event.value)" [selectedItem]="findStatusOption(filters.status)"
+                 [options]="STATUS_OPTIONS" />
+   <app-transparent-button class="text-blue-500" (click)="resetFilters()">
+      Clear
+   </app-transparent-button>
+
+   <div class="highlight flex gap-2 ml-auto rounded-md">
+      <img ngSrc="/assets/icons/search.svg" alt="search" width="20" height="20">
+      <input [value]="filters.name" (input)="updateName($event)" class="w-full text-sm bg-transparent" placeholder="Search courses">
+   </div>
+</div>

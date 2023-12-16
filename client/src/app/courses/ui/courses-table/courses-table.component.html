@@ -1,0 +1,27 @@
+<app-table [columnWidths]="['35px', '13%', '100%', '25%']" class="rounded-md"
+           [columns]="courseColumns" [data]="courses" [cellTemplate]="cell"/>
+<ng-template let-course let-col="column" #cell [appTypedTemplate]="tableContext">
+   @switch (col.key) {
+      @case ('imageUrl') {
+         <img width="120" height="60" priority="" [ngSrc]="course[col.key]" alt="{{ course[col.key] }}"
+              class="object-cover rounded-md">
+      }
+      @case ('name') {
+         <div class="flex flex-col items-start justify-between h-full">
+            <a class="text-blue-600" [routerLink]="['/courses', course.id]">{{ course[col.key] }}</a>
+            @if (course.instructors.length > 0) {
+               <div class="text-sm">
+                  <b>Instructors: </b>
+                  <span>{{ getInstructorNames(course.instructors) }}</span>
+               </div>
+            }
+         </div>
+      }
+      @case ('status') {
+         <app-badge>{{ course[col.key] }}</app-badge>
+      }
+      @default {
+         {{ course[col.key] }}
+      }
+   }
+</ng-template>

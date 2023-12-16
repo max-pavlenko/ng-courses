@@ -1,0 +1,5 @@
+<app-heading class="mb-8">Courses</app-heading>
+<div class="bg-white rounded-md">
+   <app-courses-filters [filters]="(coursesService.filters$ | async)!"/>
+   <app-courses-table [courses]="(coursesService.filteredCourses$ | async)!"/>
+</div>
