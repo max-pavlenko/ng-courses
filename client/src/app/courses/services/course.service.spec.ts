@@ -4,6 +4,7 @@ import {CourseService} from './course.service';
 import {DEFAULT_FILTERS, FILTER_COURSE_STATUS} from '../constants/filters';
 import {CourseFilters} from '../models/filters';
 import {Course, CourseStatus} from '../models/course';
+import {API_URL} from '../../../api/api.constants';
 
 describe('CourseService', () => {
    let service: CourseService;
@@ -33,7 +34,7 @@ describe('CourseService', () => {
          expect(courses).toEqual(courses);
       });
 
-      const req = httpTestingController.expectOne('http://localhost:3000/courses');
+      const req = httpTestingController.expectOne(`${API_URL}/courses`);
       expect(req.request.method).toEqual('GET');
       req.flush(courses);
    });
@@ -44,7 +45,7 @@ describe('CourseService', () => {
          expect(c).toEqual(course);
       });
 
-      const req = httpTestingController.expectOne('http://localhost:3000/courses/0');
+      const req = httpTestingController.expectOne(`${API_URL}/courses/0`);
       expect(req.request.method).toEqual('GET');
       req.flush(course);
    });

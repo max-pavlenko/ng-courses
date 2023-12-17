@@ -5,6 +5,7 @@ import {BehaviorSubject, combineLatest, distinctUntilChanged, map} from 'rxjs';
 import {DEFAULT_FILTERS} from '../constants/filters';
 import {CourseFilters} from '../models/filters';
 import {Numerical} from '../../shared/types/utils';
+import {API_URL} from '../../../api/api.constants';
 
 @Injectable({
    providedIn: 'root'
@@ -21,11 +22,11 @@ export class CourseService {
    }
 
    getAll() {
-      return this.http.get<Course[]>('http://localhost:3000/courses');
+      return this.http.get<Course[]>(`${API_URL}/courses`);
    }
 
    getOne(id: Numerical) {
-      return this.http.get<Course>(`http://localhost:3000/courses/${id}`);
+      return this.http.get<Course>(`${API_URL}/${id}`);
    }
 
    patchFilters(filters: Partial<CourseFilters>) {
