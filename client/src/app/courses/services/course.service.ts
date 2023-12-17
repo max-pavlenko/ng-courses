@@ -26,7 +26,7 @@ export class CourseService {
    }
 
    getOne(id: Numerical) {
-      return this.http.get<Course>(`${API_URL}/${id}`);
+      return this.http.get<Course>(`${API_URL}/courses/${id}`);
    }
 
    patchFilters(filters: Partial<CourseFilters>) {
