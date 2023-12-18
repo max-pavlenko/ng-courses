@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component, Input, TemplateRef} from '@angular/core';
 import {NgForOf, NgOptimizedImage, NgStyle, NgTemplateOutlet} from '@angular/common';
 import {Column} from './table.types';
+import {Numerical} from '../../../types/utils';
 
 @Component({
    selector: 'app-table',
@@ -15,10 +16,10 @@ import {Column} from './table.types';
    styleUrl: './table.component.scss',
    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TableComponent<T extends Record<string, any>>  {
+export class TableComponent<T extends { id: Numerical }>  {
    @Input({required: true}) data: T[] = [];
    @Input({required: true}) columns: Column<T>[] = [];
-   @Input() cellTemplate?: TemplateRef<{ column: Column<T>, $implicit: T }>;
+   @Input() cellTemplate?: TemplateRef<any>;
    @Input() columnWidths: string[] = this.computeCellWidth();
 
    computeCellWidth() {

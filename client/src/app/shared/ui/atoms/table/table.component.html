@@ -1,14 +1,18 @@
 <div class="min-w-full rounded-md bg-white text-start shadow-lg">
    <ul class="flex bg-slate-100 gap-4 px-4 py-3 border-b">
-      <li [ngStyle]="{width: columnWidths[i]}" *ngFor="let column of columns; index as i" class="font-bold">{{ column.label }}</li>
+      @for (column of columns; track column.key) {
+         <li [ngStyle]="{width: columnWidths[$index]}" class="font-bold">{{ column.label }}</li>
+      }
    </ul>
-   <ul *ngFor="let item of data" class="border-b min-h-[80px] flex justify-between gap-4 px-4 py-3 row">
-      <li [ngStyle]="{width: columnWidths[i]}" *ngFor="let column of columns; index as i" class="flex items-center">
-         @if (cellTemplate) {
-            <ng-container *ngTemplateOutlet="cellTemplate; context: { $implicit: item, column }" />
-         } @else {
-            {{ item[column.key] }}
+      <ul *ngFor="let item of data; index as i" class="border-b min-h-[80px] flex justify-between gap-4 px-4 py-3 row">
+         @for (column of columns; track column.key) {
+            <li [ngStyle]="{width: columnWidths[$index]}" class="flex items-center">
+               @if (cellTemplate) {
+                  <ng-container *ngTemplateOutlet="cellTemplate; context: { $implicit: item, column }" />
+               } @else {
+                  {{ item[column.key] }}
+               }
+            </li>
          }
-      </li>
-   </ul>
+      </ul>
 </div>

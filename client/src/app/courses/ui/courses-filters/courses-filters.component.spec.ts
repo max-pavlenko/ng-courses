@@ -36,7 +36,7 @@ describe('CoursesFiltersComponent', () => {
 
    it('should update status filter on dropdown selection', () => {
       const statusOption: FilterCourseStatus = FILTER_COURSE_STATUS.DRAFT;
-      component.updateStatus(statusOption);
+      component.patchStatusFilter(statusOption);
       expect(mockCourseService.patchFilters).toHaveBeenCalledWith({ status: statusOption });
    });
 

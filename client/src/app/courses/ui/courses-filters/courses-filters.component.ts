@@ -7,16 +7,16 @@ import {CourseService} from '../../services/course.service';
 import {FilterCourseStatus} from '../../models/filters';
 
 @Component({
-  selector: 'app-courses-filters',
-  standalone: true,
+   selector: 'app-courses-filters',
+   standalone: true,
    imports: [
       DropdownComponent,
       NgOptimizedImage,
       TransparentButtonComponent
    ],
-  templateUrl: './courses-filters.component.html',
-  styleUrl: './courses-filters.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+   templateUrl: './courses-filters.component.html',
+   styleUrl: './courses-filters.component.scss',
+   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CoursesFiltersComponent {
    readonly STATUS_OPTIONS = STATUS_OPTIONS;
@@ -25,13 +25,13 @@ export class CoursesFiltersComponent {
    constructor(public coursesService: CourseService) {
    }
 
-   updateName(e: Event) {
+   patchNameFilter(e: Event) {
       this.coursesService.patchFilters({
          name: (e.target as HTMLInputElement)?.value,
       });
    }
 
-   updateStatus(status: FilterCourseStatus) {
+   patchStatusFilter(status: FilterCourseStatus) {
       this.coursesService.patchFilters({status,});
    }
 
