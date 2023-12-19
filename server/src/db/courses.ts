@@ -1,9 +1,11 @@
-export const COURSES = [
+import { Course, CourseStatus } from "../../../client/src/app/courses/models/course";
+
+export const COURSES: Course[] = [
    {
       id: 0,
       imageUrl: 'https://picsum.photos/200/100',
       name: 'Fundamentals of Credit',
-      status: 'DRAFT',
+      status: CourseStatus.DRAFT,
       instructors: [
          { name: 'Roli Jain', image: 'https://picsum.photos/300/300' },
          { name: 'Sebastian Taylor', image: 'https://picsum.photos/300/300' },
@@ -13,7 +15,7 @@ export const COURSES = [
       id: 1,
       imageUrl: 'https://picsum.photos/200/100',
       name: 'Accounting Fundamentals',
-      status: 'PUBLISHED',
+      status: CourseStatus.PUBLISHED,
       instructors: [{ name: 'Roli Jain', image: 'https://picsum.photos/300/300' }],
    },
 ];

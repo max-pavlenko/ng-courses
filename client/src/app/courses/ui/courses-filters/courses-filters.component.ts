@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, inject} from '@angular/core';
 import {DEFAULT_FILTERS, STATUS_OPTIONS} from '../../constants/filters';
 import {DropdownComponent} from '../../../shared/ui/atoms/dropdown/dropdown.component';
 import {NgOptimizedImage} from '@angular/common';
@@ -21,25 +21,23 @@ import {FilterCourseStatus} from '../../models/filters';
 export class CoursesFiltersComponent {
    readonly STATUS_OPTIONS = STATUS_OPTIONS;
    @Input({required: true}) filters = DEFAULT_FILTERS;
+   coursesService = inject(CourseService)
 
-   constructor(public coursesService: CourseService) {
-   }
-
-   patchNameFilter(e: Event) {
+   patchNameFilter(e: Event): void {
       this.coursesService.patchFilters({
          name: (e.target as HTMLInputElement)?.value,
       });
    }
 
-   patchStatusFilter(status: FilterCourseStatus) {
-      this.coursesService.patchFilters({status,});
+   patchStatusFilter(status: FilterCourseStatus): void {
+      this.coursesService.patchFilters({status});
    }
 
-   resetFilters() {
+   resetFilters(): void {
       this.coursesService.patchFilters(DEFAULT_FILTERS);
    }
 
-   findStatusOption(status: FilterCourseStatus) {
+   findStatusOption(status: FilterCourseStatus)  { // no return type
       return STATUS_OPTIONS.find(option => option.value === status)!;
    }
 }

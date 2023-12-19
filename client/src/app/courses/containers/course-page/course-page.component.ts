@@ -1,10 +1,12 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {CourseService} from '../../services/course.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AsyncPipe} from '@angular/common';
-import {catchError, EMPTY, switchMap} from 'rxjs';
+import {catchError, EMPTY, Observable, switchMap} from 'rxjs';
 import {CourseDetailsComponent} from '../../ui/course-details/course-details.component';
 import {HeadingComponent} from '../../../shared/ui/atoms/heading/heading.component';
+import { Numerical } from '../../../shared/types/utils';
+import { Course } from '../../models/course';
 
 @Component({
    selector: 'app-course-page',
@@ -19,14 +21,15 @@ import {HeadingComponent} from '../../../shared/ui/atoms/heading/heading.compone
    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class CoursePageComponent {
-   course$ = this.route.params.pipe(
-      switchMap(({id}) => this.courseService.getOne(id).pipe(
+   @Input() set id(id: Numerical) {
+      this.course$ = this.courseService.getOne(id).pipe(
          catchError(() => {
             this.router.navigate(['/courses']);
             return EMPTY;
          })
-      )),
-   );
+      )
+   }
+   course$!: Observable<Course>;
 
    constructor(private courseService: CourseService, private route: ActivatedRoute, private router: Router) {
    }

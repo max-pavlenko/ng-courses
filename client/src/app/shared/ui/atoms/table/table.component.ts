@@ -13,7 +13,6 @@ import {Numerical} from '../../../types/utils';
       NgTemplateOutlet
    ],
    templateUrl: './table.component.html',
-   styleUrl: './table.component.scss',
    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableComponent<T extends { id: Numerical }>  {
@@ -22,7 +21,7 @@ export class TableComponent<T extends { id: Numerical }>  {
    @Input() cellTemplate?: TemplateRef<any>;
    @Input() columnWidths: string[] = this.computeCellWidth();
 
-   computeCellWidth() {
+   computeCellWidth(): string[] {
       return this.columns.map(() => `${1 / (this.columns.length || 1) * 100}%`);
    }
 }

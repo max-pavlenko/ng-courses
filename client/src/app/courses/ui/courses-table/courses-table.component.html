@@ -3,7 +3,7 @@
 <ng-template let-course let-col="column" #cell [appTypedTemplate]="tableContext">
    @switch (col.key) {
       @case ('imageUrl') {
-         <img width="120" height="60" priority="" [ngSrc]="course.imageUrl" alt="{{ course.imageUrl }}"
+         <img width="120" height="60" priority [ngSrc]="course.imageUrl" alt="{{ course.name }} + 'image'"
               class="object-cover rounded-md">
       }
       @case ('name') {
