@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, inject} from '@angular/core';
 import {ChipComponent} from '../../../shared/ui/atoms/chip/chip.component';
 import {CourseInfoControlsComponent} from '../course-info-controls/course-info-controls.component';
 import {FigureComponent} from '../../../shared/ui/atoms/figure/figure.component';
@@ -21,7 +21,5 @@ import {UtilityService} from '../../../shared/services/utility.service';
 })
 export class CourseDetailsComponent {
    @Input({required: true}) course!: Course;
-
-   constructor(protected utilityService: UtilityService) {
-   }
+   protected utilityService = inject(UtilityService)
 }
